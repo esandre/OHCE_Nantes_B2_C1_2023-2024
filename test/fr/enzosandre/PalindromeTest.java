@@ -47,10 +47,16 @@ public class PalindromeTest {
         assertEquals(Expressions.Bonjour, lines[0]);
     }
 
-    @Test
-    public void testAuRevoir(){
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "radar"})
+    public void testAuRevoir(String chaîne){
         // ETANT DONNE une chaîne
         // QUAND on vérifie si c'est un palindrome
+        String résultat = VérificationPalindrome.Vérifier(chaîne);
+
         // ALORS toute réponse est suivie de "Au Revoir"
+        String[] lines = résultat.split(System.lineSeparator());
+        String lastLine = lines[lines.length - 1];
+        assertEquals(Expressions.AuRevoir, lastLine);
     }
 }

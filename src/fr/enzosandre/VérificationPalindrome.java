@@ -10,12 +10,14 @@ public class VérificationPalindrome {
         resultBuilder.append(Expressions.Bonjour);
         resultBuilder.append(System.lineSeparator());
         resultBuilder.append(miroir);
+        resultBuilder.append(System.lineSeparator());
 
         if(miroir.equals(chaîne)) {
-            resultBuilder.append(System.lineSeparator());
             resultBuilder.append(Expressions.BienDit);
+            resultBuilder.append(System.lineSeparator());
         }
 
+        resultBuilder.append(Expressions.AuRevoir);
         return resultBuilder.toString();
     }
 }
