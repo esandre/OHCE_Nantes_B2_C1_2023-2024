@@ -11,7 +11,7 @@ public class PalindromeTest {
     @ParameterizedTest
     @ValueSource(strings = {"test", "epsi"})
     public void testMiroir(String chaîne) {
-        // ETANT DONNE une chaîne
+        // ETANT DONNE une chaîne n'étant pas un palindrome
         // QUAND on vérifie si c'est un palindrome
         String résultat = VérificationPalindrome.Vérifier(chaîne);
 
@@ -20,5 +20,18 @@ public class PalindromeTest {
                 .reverse()
                 .toString();
         assertEquals(inversion, résultat);
+    }
+
+    @Test
+    public void testPalindrome(){
+        // ETANT DONNE un palindrome
+        String palindrome = "radar";
+
+        // QUAND on vérifie si c'est un palindrome
+        String résultat = VérificationPalindrome.Vérifier(palindrome);
+
+        // ALORS la chaîne est répétée, suivie de "Bien dit !"
+        String attendu = palindrome + System.lineSeparator() + Expressions.BienDit;
+        assertEquals(attendu, résultat);
     }
 }
