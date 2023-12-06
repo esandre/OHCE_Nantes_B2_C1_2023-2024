@@ -1,11 +1,10 @@
 package fr.enzosandre;
 
-import jdk.jshell.spi.ExecutionControl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PalindromeTest {
     @ParameterizedTest
@@ -19,7 +18,8 @@ public class PalindromeTest {
         String inversion = new StringBuilder(chaîne)
                 .reverse()
                 .toString();
-        assertEquals(inversion, résultat);
+
+        assertTrue(résultat.contains(inversion));
     }
 
     @Test
@@ -32,6 +32,25 @@ public class PalindromeTest {
 
         // ALORS la chaîne est répétée, suivie de "Bien dit !"
         String attendu = palindrome + System.lineSeparator() + Expressions.BienDit;
-        assertEquals(attendu, résultat);
+        assertTrue(résultat.contains(attendu));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "radar"})
+    public void testBonjour(String chaîne){
+        // ETANT DONNE une chaîne
+        // QUAND on vérifie si c'est un palindrome
+        String résultat = VérificationPalindrome.Vérifier(chaîne);
+
+        // ALORS toute réponse est précédée de "Bonjour"
+        String[] lines = résultat.split(System.lineSeparator());
+        assertEquals(Expressions.Bonjour, lines[0]);
+    }
+
+    @Test
+    public void testAuRevoir(){
+        // ETANT DONNE une chaîne
+        // QUAND on vérifie si c'est un palindrome
+        // ALORS toute réponse est suivie de "Au Revoir"
     }
 }

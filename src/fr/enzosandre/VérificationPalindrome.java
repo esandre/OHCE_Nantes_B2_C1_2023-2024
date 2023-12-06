@@ -6,10 +6,16 @@ public class VérificationPalindrome {
                 .reverse()
                 .toString();
 
-        if(miroir.equals(chaîne))
-            return miroir
-                    + System.lineSeparator()
-                    + Expressions.BienDit;
-        return miroir;
+        StringBuilder resultBuilder = new StringBuilder();
+        resultBuilder.append(Expressions.Bonjour);
+        resultBuilder.append(System.lineSeparator());
+        resultBuilder.append(miroir);
+
+        if(miroir.equals(chaîne)) {
+            resultBuilder.append(System.lineSeparator());
+            resultBuilder.append(Expressions.BienDit);
+        }
+
+        return resultBuilder.toString();
     }
 }
