@@ -25,7 +25,7 @@ public class PalindromeTest {
     }
 
     @Test
-    public void testPalindromeFrançais(){
+    public void testPalindromeFrançais() {
         // ETANT DONNE un palindrome
         String palindrome = "radar";
 
@@ -44,7 +44,7 @@ public class PalindromeTest {
     }
 
     @Test
-    public void testPalindromeAnglais(){
+    public void testPalindromeAnglais() {
         // ETANT DONNE un palindrome
         String palindrome = "radar";
 
@@ -64,7 +64,7 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"test", "radar"})
-    public void testBonjourFrançais(String chaîne){
+    public void testBonjourFrançais(String chaîne) {
 
         // ETANT DONNE un utilisateur parlant anglais
         LangueFrançaise langue = new LangueFrançaise();
@@ -83,7 +83,7 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"test", "radar"})
-    public void testBonjourAnglais(String chaîne){
+    public void testBonjourAnglais(String chaîne) {
 
         // ETANT DONNE un utilisateur parlant anglais
         LangueAnglaise langue = new LangueAnglaise();
@@ -102,14 +102,39 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"test", "radar"})
-    public void testAuRevoir(String chaîne){
+    public void testAuRevoirFrançais(String chaîne) {
+        // ETANT DONNE un utilisateur parlant anglais
+        LangueFrançaise langue = new LangueFrançaise();
+        var vérificateur = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
         // ETANT DONNE une chaîne
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  VérificationPalindromeBuilder.Default().Vérifier(chaîne);
+        String résultat = vérificateur.Vérifier(chaîne);
 
         // ALORS toute réponse est suivie de "Au Revoir"
         String[] lines = résultat.split(System.lineSeparator());
         String lastLine = lines[lines.length - 1];
         assertEquals(Expressions.AuRevoir, lastLine);
-    } 
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "radar"})
+    public void testAuRevoirAnglais(String chaîne) {
+        LangueAnglaise langue = new LangueAnglaise();
+        var vérificateur = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
+        // ETANT DONNE une chaîne
+        // QUAND on vérifie si c'est un palindrome
+        String résultat = vérificateur.Vérifier(chaîne);
+
+        // ALORS toute réponse est suivie de "Au Revoir"
+        String[] lines = résultat.split(System.lineSeparator());
+        String lastLine = lines[lines.length - 1];
+        assertEquals(Expressions.GoodBye, lastLine);
+    }
 }

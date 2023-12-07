@@ -11,4 +11,9 @@ public class LangueFrançaise implements LangueInterface {
         return Expressions.Bonjour;
     }
 
+    @Override
+    public String SeQuitter() {
+        return Expressions.AuRevoir;
+    }
+
 }

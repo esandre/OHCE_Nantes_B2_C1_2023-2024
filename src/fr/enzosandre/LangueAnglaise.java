@@ -10,4 +10,9 @@ public class LangueAnglaise implements LangueInterface {
     public String Saluer() {
         return Expressions.Hello;
     }
+
+    @Override
+    public String SeQuitter() {
+        return Expressions.GoodBye;
+    }
 }

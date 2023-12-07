@@ -10,4 +10,7 @@ public class LangueStub implements LangueInterface {
 
     @Override
     public String Saluer() { return ""; }
+
+    @Override
+    public String SeQuitter() { return ""; }
 }
