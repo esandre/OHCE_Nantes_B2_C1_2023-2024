@@ -1,6 +1,6 @@
 package fr.enzosandre;
 
-import fr.enzosandre.test.utilities.VérificationPalindromeBuilder;
+import fr.enzosandre.test.utilities.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -84,5 +84,18 @@ public class PalindromeTest {
         String[] lines = résultat.split(System.lineSeparator());
         String lastLine = lines[lines.length - 1];
         assertEquals(Expressions.AuRevoir, lastLine);
+    }
+
+    @Test
+    public void UnPalindromeAppelleFéliciterDeLaLangue(){
+        var langue = new LangueSpy();
+
+        VérificationPalindrome vérificateur = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
+        vérificateur.Vérifier("radar");
+
+        assertTrue(langue.FéliciterAppeléAuMoinsUneFois());
     }
 }
