@@ -13,7 +13,7 @@ public class VérificationPalindrome {
                 .toString();
 
         StringBuilder resultBuilder = new StringBuilder();
-        resultBuilder.append(Expressions.Bonjour);
+        resultBuilder.append(this.langue.Saluer());
         resultBuilder.append(System.lineSeparator());
         resultBuilder.append(miroir);
         resultBuilder.append(System.lineSeparator());

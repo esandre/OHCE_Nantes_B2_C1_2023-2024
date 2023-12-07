@@ -7,6 +7,11 @@ public class LangueAnglaise implements LangueInterface {
     }
 
     @Override
+    public String Saluer() {
+        return Expressions.Hello;
+    }
+
+    @Override
     public String toString() {
         return "Langue Anglaise";
     }

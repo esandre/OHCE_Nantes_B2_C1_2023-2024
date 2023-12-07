@@ -74,26 +74,28 @@ public class PalindromeTest {
 
     static Stream<Arguments> casTestBonjour() {
         return Stream.of(
-                Arguments.of("test"),
-                Arguments.of("radar")
+                Arguments.of("test", new LangueFrançaise(), Expressions.Bonjour),
+                Arguments.of("radar", new LangueFrançaise(), Expressions.Bonjour),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello)
         );
     }
 
     @ParameterizedTest
     @MethodSource("casTestBonjour")
-    public void testBonjourFrançais(String chaîne){
+    public void testBonjourFrançais(String chaîne, LangueInterface langue, String salutations){
         // ETANT DONNE une chaîne
-        // ET un utilisateur parlant français
+        // ET un utilisateur parlant une <langue>
         var vérification = new VérificationPalindromeBuilder()
-                .AyantPourLangue(new LangueFrançaise())
+                .AyantPourLangue(langue)
                 .Build();
 
         // QUAND on vérifie si c'est un palindrome
         String résultat =  vérification.Vérifier(chaîne);
 
-        // ALORS toute réponse est précédée de "Bonjour"
+        // ALORS toute réponse est précédée de <salutations> dans cette <langue>
         String[] lines = résultat.split(System.lineSeparator());
-        assertEquals(Expressions.Bonjour, lines[0]);
+        assertEquals(salutations, lines[0]);
     }
 
     @ParameterizedTest

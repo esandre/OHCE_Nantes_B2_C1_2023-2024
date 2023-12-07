@@ -7,4 +7,9 @@ public class LangueStub implements LangueInterface {
     public String Féliciter() {
         return "";
     }
+
+    @Override
+    public String Saluer() {
+        return "";
+    }
 }
