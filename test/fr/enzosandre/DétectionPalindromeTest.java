@@ -1,6 +1,6 @@
 package fr.enzosandre;
 
-import fr.enzosandre.test.utilities.VérificationPalindromeBuilder;
+import fr.enzosandre.test.utilities.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,6 +54,23 @@ public class DétectionPalindromeTest {
         // ALORS la chaîne est répétée, suivie de félicitations dans cette langue
         String attendu = palindrome + System.lineSeparator() + félicitations;
         assertTrue(résultat.contains(attendu));
+    }
+
+    @Test
+    @DisplayName("Si pas un palindrome, on ne félicite pas")
+    public void testSansPalindromePasDeFélicitations(){
+        // ETANT DONNE un non-palindrome
+        String palindrome = "test";
+        var langueSpy = new LangueSpy();
+        var vérificateur = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langueSpy)
+                .Build();
+
+        // QUAND on vérifie si c'est un palindrome
+        vérificateur.Vérifier(palindrome);
+
+        // ALORS le résultat ne comporte pas de félicitations
+        assertFalse(langueSpy.FéliciterAÉtéInvoqué());
     }
 
     static Stream<Arguments> casTestBonjour() {
