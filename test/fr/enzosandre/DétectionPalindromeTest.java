@@ -1,6 +1,7 @@
 package fr.enzosandre;
 
 import fr.enzosandre.test.utilities.VérificationPalindromeBuilder;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,9 +12,10 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PalindromeTest {
+public class DétectionPalindromeTest {
     @ParameterizedTest
     @ValueSource(strings = {"test", "epsi"})
+    @DisplayName("La chaîne entrée est renvoyée à l'envers")
     public void testMiroir(String chaîne) {
         // ETANT DONNE une chaîne n'étant pas un palindrome
         // QUAND on vérifie si c'est un palindrome
@@ -36,6 +38,7 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @MethodSource("casTestPalindrome")
+    @DisplayName("Si la chaîne est un palindrome, on félicite")
     public void testPalindrome(LangueInterface langue, String félicitations){
         // ETANT DONNE un palindrome
         String palindrome = "radar";
@@ -53,25 +56,6 @@ public class PalindromeTest {
         assertTrue(résultat.contains(attendu));
     }
 
-    @Test
-    public void testPalindromeAnglais(){
-        // ETANT DONNE un palindrome
-        String palindrome = "radar";
-
-        // ET un utilisateur parlant anglais
-        LangueAnglaise langue = new LangueAnglaise();
-        var vérificateur = new VérificationPalindromeBuilder()
-                .AyantPourLangue(langue)
-                .Build();
-
-        // QUAND on vérifie si c'est un palindrome
-        String résultat = vérificateur.Vérifier(palindrome);
-
-        // ALORS la chaîne est répétée, suivie de "Well said !"
-        String attendu = palindrome + System.lineSeparator() + Expressions.WellSaid;
-        assertTrue(résultat.contains(attendu));
-    }
-
     static Stream<Arguments> casTestBonjour() {
         return Stream.of(
                 Arguments.of("test", new LangueFrançaise(), Expressions.Bonjour),
@@ -83,7 +67,8 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @MethodSource("casTestBonjour")
-    public void testBonjourFrançais(String chaîne, LangueInterface langue, String salutations){
+    @DisplayName("Avant toute chose, on salue")
+    public void testBonjour(String chaîne, LangueInterface langue, String salutations){
         // ETANT DONNE une chaîne
         // ET un utilisateur parlant une <langue>
         var vérification = new VérificationPalindromeBuilder()
@@ -100,6 +85,7 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"test", "radar"})
+    @DisplayName("Après avoir répondu, on s'acquitte")
     public void testAuRevoir(String chaîne){
         // ETANT DONNE une chaîne
         // QUAND on vérifie si c'est un palindrome
