@@ -59,5 +59,5 @@ public class PalindromeTest {
         String[] lines = résultat.split(System.lineSeparator());
         String lastLine = lines[lines.length - 1];
         assertEquals(Expressions.AuRevoir, lastLine);
-    }
+    } 
 }
