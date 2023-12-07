@@ -64,14 +64,40 @@ public class PalindromeTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"test", "radar"})
-    public void testBonjour(String chaîne){
-        // ETANT DONNE une chaîne
+    public void testBonjourFrançais(String chaîne){
+
+        // ETANT DONNE un utilisateur parlant anglais
+        LangueFrançaise langue = new LangueFrançaise();
+        var vérificateur = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
+        // QUAND on récoit une chaîne
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  VérificationPalindromeBuilder.Default().Vérifier(chaîne);
+        String résultat = vérificateur.Vérifier(chaîne);
 
         // ALORS toute réponse est précédée de "Bonjour"
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(Expressions.Bonjour, lines[0]);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "radar"})
+    public void testBonjourAnglais(String chaîne){
+
+        // ETANT DONNE un utilisateur parlant anglais
+        LangueAnglaise langue = new LangueAnglaise();
+        var vérificateur = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
+        // QUAND on récoit une chaîne
+        // QUAND on vérifie si c'est un palindrome
+        String résultat = vérificateur.Vérifier(chaîne);
+
+        // ALORS toute réponse est précédée de "Bonjour"
+        String[] lines = résultat.split(System.lineSeparator());
+        assertEquals(Expressions.Hello, lines[0]);
     }
 
     @ParameterizedTest
