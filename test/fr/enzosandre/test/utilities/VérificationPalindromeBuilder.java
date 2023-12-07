@@ -4,7 +4,7 @@ import fr.enzosandre.LangueInterface;
 import fr.enzosandre.VérificationPalindrome;
 
 public class VérificationPalindromeBuilder {
-    private LangueInterface langue;
+    private LangueInterface langue = new LangueStub();
 
     public static VérificationPalindrome Default() {
         return new VérificationPalindromeBuilder().Build();
