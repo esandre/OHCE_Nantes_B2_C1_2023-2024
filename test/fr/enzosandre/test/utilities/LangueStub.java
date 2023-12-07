@@ -12,4 +12,9 @@ public class LangueStub implements LangueInterface {
     public String Saluer() {
         return "";
     }
+
+    @Override
+    public String direAurevoir() {
+        return "";
+    }
 }

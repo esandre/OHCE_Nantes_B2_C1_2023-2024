@@ -23,7 +23,7 @@ public class VérificationPalindrome {
             resultBuilder.append(System.lineSeparator());
         }
 
-        resultBuilder.append(Expressions.AuRevoir);
+        resultBuilder.append(this.langue.direAurevoir());
         return resultBuilder.toString();
     }
 }

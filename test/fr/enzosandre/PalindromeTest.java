@@ -81,6 +81,15 @@ public class PalindromeTest {
         );
     }
 
+    static Stream<Arguments> casTestAuRevoir() {
+        return Stream.of(
+                Arguments.of("test", new LangueFrançaise(), Expressions.AuRevoir),
+                Arguments.of("radar", new LangueFrançaise(), Expressions.AuRevoir),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Bye),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Bye)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("casTestBonjour")
     public void testBonjourFrançais(String chaîne, LangueInterface langue, String salutations){
@@ -99,15 +108,20 @@ public class PalindromeTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"test", "radar"})
-    public void testAuRevoir(String chaîne){
+    @MethodSource("casTestAuRevoir")
+    public void testAuRevoirFrancais(String chaîne, LangueInterface langue, String auRevoir){
         // ETANT DONNE une chaîne
+        // ET un utilisateur parlant une <langue>
+        var vérification = new VérificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  VérificationPalindromeBuilder.Default().Vérifier(chaîne);
+        String résultat =  vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est suivie de "Au Revoir"
         String[] lines = résultat.split(System.lineSeparator());
         String lastLine = lines[lines.length - 1];
-        assertEquals(Expressions.AuRevoir, lastLine);
+        assertEquals(auRevoir, lastLine);
     }
 }
