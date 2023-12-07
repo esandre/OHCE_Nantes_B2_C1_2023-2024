@@ -1,9 +1,9 @@
 package fr.enzosandre;
 
-public class VérificationPalindrome {
+public class VerificationPalindrome {
     private final LangueInterface langue;
 
-    public VérificationPalindrome(LangueInterface langue) {
+    public VerificationPalindrome(LangueInterface langue) {
         this.langue = langue;
     }
 
@@ -23,7 +23,7 @@ public class VérificationPalindrome {
             resultBuilder.append(System.lineSeparator());
         }
 
-        resultBuilder.append(Expressions.AuRevoir);
+        resultBuilder.append(this.langue.SeQuitter());
         return resultBuilder.toString();
     }
 }

@@ -96,12 +96,17 @@ public class DetectionPalindromeTest {
     @DisplayName("Après avoir répondu, on s'acquitte")
     public void testAuRevoir(String chaîne, LangueInterface langue, String salutations){
         // ETANT DONNE une chaîne
+        // ET un utilisateur parlant une <langue>
+        var vérification = new VerificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  VerificationPalindromeBuilder.Default().Vérifier(chaîne);
+        String résultat =  vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est suivie de "Au Revoir"
         String[] lines = résultat.split(System.lineSeparator());
         String lastLine = lines[lines.length - 1];
-        assertEquals(Expressions.AuRevoir, lastLine);
+        assertEquals(salutations, lastLine);
     }
 }

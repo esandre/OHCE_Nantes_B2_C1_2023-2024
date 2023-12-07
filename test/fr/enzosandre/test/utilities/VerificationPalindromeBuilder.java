@@ -1,12 +1,12 @@
 package fr.enzosandre.test.utilities;
 
 import fr.enzosandre.LangueInterface;
-import fr.enzosandre.VérificationPalindrome;
+import fr.enzosandre.VerificationPalindrome;
 
 public class VerificationPalindromeBuilder {
     private LangueInterface langue = new LangueStub();
 
-    public static VérificationPalindrome Default() {
+    public static VerificationPalindrome Default() {
         return new VerificationPalindromeBuilder().Build();
     }
 
@@ -15,7 +15,7 @@ public class VerificationPalindromeBuilder {
         return this;
     }
 
-    public VérificationPalindrome Build() {
-        return new VérificationPalindrome(this.langue);
+    public VerificationPalindrome Build() {
+        return new VerificationPalindrome(this.langue);
     }
 }
