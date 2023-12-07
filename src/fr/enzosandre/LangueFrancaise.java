@@ -1,6 +1,6 @@
 package fr.enzosandre;
 
-public class LangueFrançaise implements LangueInterface {
+public class LangueFrancaise implements LangueInterface {
     @Override
     public String Féliciter() {
         return Expressions.BienDit;
@@ -10,6 +10,9 @@ public class LangueFrançaise implements LangueInterface {
     public String Saluer() {
         return Expressions.Bonjour;
     }
+
+    @Override
+    public String SeQuitter() {return Expressions.AuRevoir;}
 
     @Override
     public String toString() {

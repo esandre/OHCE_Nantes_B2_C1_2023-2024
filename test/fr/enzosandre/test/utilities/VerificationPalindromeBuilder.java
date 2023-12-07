@@ -3,14 +3,14 @@ package fr.enzosandre.test.utilities;
 import fr.enzosandre.LangueInterface;
 import fr.enzosandre.VérificationPalindrome;
 
-public class VérificationPalindromeBuilder {
+public class VerificationPalindromeBuilder {
     private LangueInterface langue = new LangueStub();
 
     public static VérificationPalindrome Default() {
-        return new VérificationPalindromeBuilder().Build();
+        return new VerificationPalindromeBuilder().Build();
     }
 
-    public VérificationPalindromeBuilder AyantPourLangue(LangueInterface langue){
+    public VerificationPalindromeBuilder AyantPourLangue(LangueInterface langue){
         this.langue = langue;
         return this;
     }
