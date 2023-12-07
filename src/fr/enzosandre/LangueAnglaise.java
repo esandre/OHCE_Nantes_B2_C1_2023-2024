@@ -5,4 +5,9 @@ public class LangueAnglaise implements LangueInterface {
     public String Féliciter() {
         return Expressions.WellSaid;
     }
+
+    @Override
+    public String toString() {
+        return "Langue Anglaise";
+    }
 }
