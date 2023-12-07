@@ -23,12 +23,15 @@ public class PalindromeTest {
     }
 
     @Test
-    public void testPalindrome(){
+    public void testPalindromeFrançais(){
         // ETANT DONNE un palindrome
         String palindrome = "radar";
 
+        // ET un utilisateur parlant français
+        LangueFrançaise langue = new LangueFrançaise();
+
         // QUAND on vérifie si c'est un palindrome
-        String résultat = VérificationPalindrome.Vérifier(palindrome);
+        String résultat = new VérificationPalindrome(langue).Vérifier(palindrome);
 
         // ALORS la chaîne est répétée, suivie de "Bien dit !"
         String attendu = palindrome + System.lineSeparator() + Expressions.BienDit;

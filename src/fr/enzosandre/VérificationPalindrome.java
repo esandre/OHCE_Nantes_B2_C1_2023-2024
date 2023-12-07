@@ -1,6 +1,9 @@
 package fr.enzosandre;
 
 public class VérificationPalindrome {
+    public VérificationPalindrome(LangueFrançaise langue) {
+    }
+
     public static String Vérifier(String chaîne) {
         String miroir =  new StringBuilder(chaîne)
                 .reverse()
