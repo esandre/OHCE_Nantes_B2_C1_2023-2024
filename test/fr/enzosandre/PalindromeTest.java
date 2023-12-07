@@ -72,12 +72,24 @@ public class PalindromeTest {
         assertTrue(résultat.contains(attendu));
     }
 
+    static Stream<Arguments> casTestBonjour() {
+        return Stream.of(
+                Arguments.of("test"),
+                Arguments.of("radar")
+        );
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = {"test", "radar"})
-    public void testBonjour(String chaîne){
+    @MethodSource("casTestBonjour")
+    public void testBonjourFrançais(String chaîne){
         // ETANT DONNE une chaîne
+        // ET un utilisateur parlant français
+        var vérification = new VérificationPalindromeBuilder()
+                .AyantPourLangue(new LangueFrançaise())
+                .Build();
+
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  VérificationPalindromeBuilder.Default().Vérifier(chaîne);
+        String résultat =  vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est précédée de "Bonjour"
         String[] lines = résultat.split(System.lineSeparator());
