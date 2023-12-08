@@ -75,27 +75,30 @@ public class DétectionPalindromeTest {
 
     static Stream<Arguments> casTestBonjour() {
         return Stream.of(
-                Arguments.of("test", new LangueFrançaise(), Expressions.Bonjour),
-                Arguments.of("radar", new LangueFrançaise(), Expressions.Bonjour),
-                Arguments.of("test", new LangueAnglaise(), Expressions.Hello),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello)
+                Arguments.of("test", new LangueFrançaise(), MomentDeLaJournée.Matin, Expressions.Bonjour),
+                Arguments.of("radar", new LangueFrançaise(), MomentDeLaJournée.Matin, Expressions.Bonjour),
+                Arguments.of("test", new LangueAnglaise(), MomentDeLaJournée.Matin, Expressions.Hello),
+                Arguments.of("radar", new LangueAnglaise(), MomentDeLaJournée.Matin, Expressions.Hello)
         );
     }
 
     @ParameterizedTest
     @MethodSource("casTestBonjour")
     @DisplayName("Avant toute chose, on salue")
-    public void testBonjour(String chaîne, LangueInterface langue, String salutations){
+    public void testBonjour(String chaîne, LangueInterface langue, MomentDeLaJournée momentDeLaJournée, String salutations){
         // ETANT DONNE une chaîne
         // ET un utilisateur parlant une <langue>
+        // ET que nous sommes le <momentDeLaJournée>
         var vérification = new VérificationPalindromeBuilder()
                 .AyantPourLangue(langue)
+                .AyantPourMomentDeLaJournée(momentDeLaJournée)
                 .Build();
 
         // QUAND on vérifie si c'est un palindrome
         String résultat =  vérification.Vérifier(chaîne);
 
-        // ALORS toute réponse est précédée de <salutations> dans cette <langue>
+        // ALORS toute réponse est précédée de <salutations>
+        // dans cette <langue> à ce moment de la journée
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(salutations, lines[0]);
     }

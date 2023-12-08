@@ -3,7 +3,7 @@ package fr.enzosandre;
 public class VérificationPalindrome {
     private final LangueInterface langue;
 
-    public VérificationPalindrome(LangueInterface langue) {
+    public VérificationPalindrome(LangueInterface langue, MomentDeLaJournée moment) {
         this.langue = langue;
     }
 
