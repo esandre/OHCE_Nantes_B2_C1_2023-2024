@@ -29,23 +29,17 @@ public class DétectionPalindromeTest {
         assertTrue(résultat.contains(inversion));
     }
 
-    static Stream<Arguments> casTestPalindrome() {
-        return Stream.of(
-                Arguments.of(new LangueAnglaise(),  Expressions.WellSaid),
-                Arguments.of(new LangueFrançaise(),  Expressions.BienDit)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("casTestPalindrome")
+    @Test
     @DisplayName("Si la chaîne est un palindrome, on félicite")
-    public void testPalindrome(LangueInterface langue, String félicitations){
+    public void testPalindrome(){
         // ETANT DONNE un palindrome
         String palindrome = "radar";
 
-        // ET un utilisateur parlant une <langue>
+        var félicitations = "Félicitations";
         var vérificateur = new VérificationPalindromeBuilder()
-                .AyantPourLangue(langue)
+                .AyantPourLangue(
+                        langue -> langue.AyantPourFélicitations(félicitations)
+                )
                 .Build();
 
         // QUAND on vérifie si c'est un palindrome
