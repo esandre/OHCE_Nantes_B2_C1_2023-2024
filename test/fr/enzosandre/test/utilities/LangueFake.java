@@ -1,17 +1,19 @@
 package fr.enzosandre.test.utilities;
 
 import fr.enzosandre.LangueInterface;
+import fr.enzosandre.MomentDeLaJournée;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class LangueFake implements LangueInterface {
     private String félicitations;
-    private String salutations;
+    private final LangueStub comportementParDéfaut = new LangueStub();
+    private final Dictionary<MomentDeLaJournée, String> salutations = new Hashtable<>();
 
     public LangueFake(){
-        var comportementParDéfaut = new LangueStub();
-        this.félicitations = comportementParDéfaut.Féliciter();
-        this.salutations = comportementParDéfaut.Saluer();
+        this.félicitations = this.comportementParDéfaut.Féliciter();
     }
-
 
     @Override
     public String Féliciter() {
@@ -19,11 +21,18 @@ public class LangueFake implements LangueInterface {
     }
 
     @Override
-    public String Saluer() {
-        return this.salutations;
+    public String Saluer(MomentDeLaJournée moment) {
+        var valeur = this.salutations.get(moment);
+        if(valeur != null) return valeur;
+
+        return this.comportementParDéfaut.Saluer(moment);
     }
 
     public void FéliciterAvec(String félicitations) {
         this.félicitations = félicitations;
+    }
+
+    public void SaluerAvecLe(MomentDeLaJournée momentDeLaJournée, String salutations) {
+        this.salutations.put(momentDeLaJournée, salutations);
     }
 }

@@ -7,7 +7,9 @@ public class LangueFrançaise implements LangueInterface {
     }
 
     @Override
-    public String Saluer() {
+    public String Saluer(MomentDeLaJournée moment) {
+        if(moment == MomentDeLaJournée.Soir ||moment == MomentDeLaJournée.Nuit)
+            return Expressions.Bonsoir;
         return Expressions.Bonjour;
     }
 

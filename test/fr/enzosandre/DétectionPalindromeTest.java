@@ -69,22 +69,30 @@ public class DétectionPalindromeTest {
 
     static Stream<Arguments> casTestBonjour() {
         return Stream.of(
-                Arguments.of("test", new LangueFrançaise(), MomentDeLaJournée.Matin, Expressions.Bonjour),
-                Arguments.of("radar", new LangueFrançaise(), MomentDeLaJournée.Matin, Expressions.Bonjour),
-                Arguments.of("test", new LangueAnglaise(), MomentDeLaJournée.Matin, Expressions.Hello),
-                Arguments.of("radar", new LangueAnglaise(), MomentDeLaJournée.Matin, Expressions.Hello)
+                Arguments.of("test", MomentDeLaJournée.Matin),
+                Arguments.of("radar", MomentDeLaJournée.Matin),
+                Arguments.of("test", MomentDeLaJournée.AprèsMidi),
+                Arguments.of("radar", MomentDeLaJournée.AprèsMidi),
+                Arguments.of("test", MomentDeLaJournée.Soir),
+                Arguments.of("radar", MomentDeLaJournée.Soir),
+                Arguments.of("test", MomentDeLaJournée.Nuit),
+                Arguments.of("radar", MomentDeLaJournée.Nuit),
+                Arguments.of("test", MomentDeLaJournée.Inconnu),
+                Arguments.of("radar", MomentDeLaJournée.Inconnu)
         );
     }
 
     @ParameterizedTest
     @MethodSource("casTestBonjour")
     @DisplayName("Avant toute chose, on salue")
-    public void testBonjour(String chaîne, LangueInterface langue, MomentDeLaJournée momentDeLaJournée, String salutations){
+    public void testBonjour(String chaîne, MomentDeLaJournée momentDeLaJournée){
         // ETANT DONNE une chaîne
-        // ET un utilisateur parlant une <langue>
+        // ET un utilisateur parlant une langue
         // ET que nous sommes le <momentDeLaJournée>
+
+        var salutations = "Hi";
         var vérification = new VérificationPalindromeBuilder()
-                .AyantPourLangue(langue)
+                .AyantPourLangue(langue -> langue.AyantPourSalutationsLe(momentDeLaJournée, salutations))
                 .AyantPourMomentDeLaJournée(momentDeLaJournée)
                 .Build();
 
@@ -92,7 +100,7 @@ public class DétectionPalindromeTest {
         String résultat =  vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est précédée de <salutations>
-        // dans cette <langue> à ce moment de la journée
+        // dans cette langue à ce moment de la journée
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(salutations, lines[0]);
     }
