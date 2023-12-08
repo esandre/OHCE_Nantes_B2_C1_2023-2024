@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.sql.SQLOutput;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -108,5 +109,33 @@ public class DetectionPalindromeTest {
         String[] lines = résultat.split(System.lineSeparator());
         String lastLine = lines[lines.length - 1];
         assertEquals(salutations, lastLine);
+    }
+
+
+    static Stream<Arguments> casTestBonjourSelonHeure() {
+        return Stream.of(
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("casTestBonjour")
+    @DisplayName("Avant toute chose, on salue")
+    public void testBonjourSelonHeure(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournée momentDeLaJournée){
+        // ETANT DONNE une chaîne
+        // ET un utilisateur parlant une <langue>
+        var vérification = new VerificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .Build();
+
+        // QUAND on vérifie si c'est un palindrome
+        String résultat =  vérification.Vérifier(chaîne);
+
+        // ALORS toute réponse est précédée de <salutations> dans cette <langue> en fonction du <momentDeLaJournée>
+        String[] lines = résultat.split(System.lineSeparator());
+        assertEquals(salutations, lines[0]);
     }
 }
