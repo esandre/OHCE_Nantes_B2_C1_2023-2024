@@ -7,7 +7,7 @@ public class LangueAnglaise implements LangueInterface {
     }
 
     @Override
-    public String Saluer() {
+    public String Saluer(MomentDeLaJournée momentDeLaJournée) {
         return Expressions.Hello;
     }
 

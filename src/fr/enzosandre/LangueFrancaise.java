@@ -7,9 +7,7 @@ public class LangueFrancaise implements LangueInterface {
     }
 
     @Override
-    public String Saluer() {
-        return Expressions.Bonjour;
-    }
+    public String Saluer(MomentDeLaJournée momentDeLaJournée) { return Expressions.Bonjour; }
 
     @Override
     public String SeQuitter() {return Expressions.AuRevoir;}
