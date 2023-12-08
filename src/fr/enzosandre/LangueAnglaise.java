@@ -7,8 +7,10 @@ public class LangueAnglaise implements LangueInterface {
     }
 
     @Override
-    public String Saluer(MomentDeLaJournée momentDeLaJournée) {
-        return Expressions.Hello;
+    public String Saluer(MomentDeLaJournee momentDeLaJournee) {
+        if(momentDeLaJournee == MomentDeLaJournee.Matin)        return Expressions.Hello;
+        if(momentDeLaJournee == MomentDeLaJournee.AprèsMidi)    return Expressions.GoodAfternoon;
+        return Expressions.GoodEvening;
     }
 
     @Override

@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.sql.SQLOutput;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,16 +55,21 @@ public class DetectionPalindromeTest {
         assertTrue(résultat.contains(attendu));
     }
 
-    static Stream<Arguments> casTestBonjour() {
+   /* static Stream<Arguments> casTestBonjour() {
         return Stream.of(
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour),
-                Arguments.of("test", new LangueAnglaise(), Expressions.Hello),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello)
-        );
-    }
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Matin),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Matin),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
+                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Soir),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Soir)
 
-    @ParameterizedTest
+        );
+    }*/
+
+  /*  @ParameterizedTest
     @MethodSource("casTestBonjour")
     @DisplayName("Avant toute chose, on salue")
     public void testBonjour(String chaîne, LangueInterface langue, String salutations){
@@ -81,7 +85,7 @@ public class DetectionPalindromeTest {
         // ALORS toute réponse est précédée de <salutations> dans cette <langue>
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(salutations, lines[0]);
-    }
+    } */
 
     static Stream<Arguments> casTestAuRevoir() {
         return Stream.of(
@@ -114,20 +118,25 @@ public class DetectionPalindromeTest {
 
     static Stream<Arguments> casTestBonjourSelonHeure() {
         return Stream.of(
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour),
-                Arguments.of("test", new LangueAnglaise(), Expressions.Hello),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello)
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournee.Matin),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournee.Matin),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournee.Matin),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournee.Matin),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournee.Soir),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournee.Soir),
+                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournee.Soir),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournee.Soir)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("casTestBonjour")
+    @MethodSource("casTestBonjourSelonHeure")
     @DisplayName("Avant toute chose, on salue")
-    public void testBonjourSelonHeure(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournée momentDeLaJournée){
+    public void testBonjourSelonHeure(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournee momentDeLaJournee){
         // ETANT DONNE une chaîne
         // ET un utilisateur parlant une <langue>
         var vérification = new VerificationPalindromeBuilder()
+                .AyantPourMomentDeLaJournee(momentDeLaJournee)
                 .AyantPourLangue(langue)
                 .Build();
 
