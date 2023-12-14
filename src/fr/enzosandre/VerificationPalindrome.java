@@ -27,6 +27,7 @@ public class VerificationPalindrome {
         }
 
         resultBuilder.append(this.langue.SeQuitter());
+        resultBuilder.append(System.lineSeparator());
         return resultBuilder.toString();
     }
 }
