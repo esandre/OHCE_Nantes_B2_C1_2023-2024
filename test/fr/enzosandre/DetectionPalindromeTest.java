@@ -1,6 +1,7 @@
 package fr.enzosandre;
 
 import fr.enzosandre.test.utilities.VerificationPalindromeBuilder;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -155,5 +156,38 @@ public class DetectionPalindromeTest {
         // ALORS toute réponse est précédée de <salutations> dans cette <langue> en fonction du <momentDeLaJournée>
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(salutations, lines[0]);
+    }
+
+
+    static Stream<Arguments> testDernierSautLigne() {
+        return Stream.of(
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Inconnu),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Inconnu),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Inconnu),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Inconnu)
+        );
+    }
+    @ParameterizedTest
+    @MethodSource("testDernierSautLigne")
+    @DisplayName("Le dernier Output est un saut de ligne")
+    public void testDernierSautLigne(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournée momentDeLaJournée) {
+        // Récupérer le séparateur de ligne du système
+        String newLine = System.getProperty("line.separator");
+
+        // ETANT DONNE une chaîne
+        // ET un utilisateur parlant une <langue>
+        // ET selon un moment de la journée
+        var vérification = new VerificationPalindromeBuilder()
+                .AyantPourLangue(langue)
+                .AyantPourMomentDeLaJournée(momentDeLaJournée)
+                .Build();
+
+        // QUAND on vérifie si c'est un palindrome
+        String résultat = vérification.Vérifier(chaîne);
+
+
+        // ALORS on vérifie si le dernier output est un saut de ligne
+
+        assertTrue(résultat.endsWith(System.lineSeparator()));
     }
 }
