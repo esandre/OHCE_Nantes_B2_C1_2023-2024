@@ -2,18 +2,20 @@ package fr.enzosandre;
 
 import fr.enzosandre.test.utilities.VerificationPalindromeBuilder;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.sql.SQLOutput;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DetectionPalindromeTest {
     @ParameterizedTest
-    @ValueSource(strings = {"test", "epsi"})
+    @ValueSource(strings = { "test", "epsi" })
     @DisplayName("La chaîne entrée est renvoyée à l'envers")
     public void testMiroir(String chaîne) {
         // ETANT DONNE une chaîne n'étant pas un palindrome
@@ -30,15 +32,15 @@ public class DetectionPalindromeTest {
 
     static Stream<Arguments> casTestPalindrome() {
         return Stream.of(
-                Arguments.of(new LangueAnglaise(),  Expressions.WellSaid),
-                Arguments.of(new LangueFrancaise(),  Expressions.BienDit)
+                Arguments.of(new LangueAnglaise(), Expressions.WellSaid),
+                Arguments.of(new LangueFrancaise(), Expressions.BienDit)
         );
     }
 
     @ParameterizedTest
     @MethodSource("casTestPalindrome")
     @DisplayName("Si la chaîne est un palindrome, on félicite")
-    public void testPalindrome(LangueInterface langue, String félicitations){
+    public void testPalindrome(LangueInterface langue, String félicitations) {
         // ETANT DONNE un palindrome
         String palindrome = "radar";
 
@@ -55,24 +57,19 @@ public class DetectionPalindromeTest {
         assertTrue(résultat.contains(attendu));
     }
 
-   /* static Stream<Arguments> casTestBonjour() {
+    static Stream<Arguments> casTestBonjour() {
         return Stream.of(
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
-                Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Matin),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Matin),
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
-                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Soir),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Soir)
-
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello)
         );
-    }*/
+    }
 
-  /*  @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("casTestBonjour")
     @DisplayName("Avant toute chose, on salue")
-    public void testBonjour(String chaîne, LangueInterface langue, String salutations){
+    public void testBonjour(String chaîne, LangueInterface langue, String salutations) {
         // ETANT DONNE une chaîne
         // ET un utilisateur parlant une <langue>
         var vérification = new VerificationPalindromeBuilder()
@@ -80,12 +77,12 @@ public class DetectionPalindromeTest {
                 .Build();
 
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  vérification.Vérifier(chaîne);
+        String résultat = vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est précédée de <salutations> dans cette <langue>
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(salutations, lines[0]);
-    } */
+    }
 
     static Stream<Arguments> casTestAuRevoir() {
         return Stream.of(
@@ -99,7 +96,7 @@ public class DetectionPalindromeTest {
     @ParameterizedTest
     @MethodSource("casTestAuRevoir")
     @DisplayName("Après avoir répondu, on s'acquitte")
-    public void testAuRevoir(String chaîne, LangueInterface langue, String salutations){
+    public void testAuRevoir(String chaîne, LangueInterface langue, String salutations) {
         // ETANT DONNE une chaîne
         // ET un utilisateur parlant une <langue>
         var vérification = new VerificationPalindromeBuilder()
@@ -107,7 +104,7 @@ public class DetectionPalindromeTest {
                 .Build();
 
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  vérification.Vérifier(chaîne);
+        String résultat = vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est suivie de "Au Revoir"
         String[] lines = résultat.split(System.lineSeparator());
@@ -115,33 +112,37 @@ public class DetectionPalindromeTest {
         assertEquals(salutations, lastLine);
     }
 
-
     static Stream<Arguments> casTestBonjourSelonHeure() {
         return Stream.of(
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournee.Matin),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournee.Matin),
-                Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournee.Matin),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournee.Matin),
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournee.Soir),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournee.Soir),
-                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournee.Soir),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournee.Soir)
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.AprèsMidi),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.AprèsMidi),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Nuit),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Nuit),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Inconnu),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Inconnu),
+                Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Matin),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Matin)
         );
     }
 
     @ParameterizedTest
     @MethodSource("casTestBonjourSelonHeure")
     @DisplayName("Avant toute chose, on salue")
-    public void testBonjourSelonHeure(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournee momentDeLaJournee){
+    public void testBonjourSelonHeure(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournée momentDeLaJournée) {
         // ETANT DONNE une chaîne
         // ET un utilisateur parlant une <langue>
+        // ET selon un moment de la journée
         var vérification = new VerificationPalindromeBuilder()
-                .AyantPourMomentDeLaJournee(momentDeLaJournee)
                 .AyantPourLangue(langue)
+                .AyantPourMomentDeLaJournée(momentDeLaJournée)
                 .Build();
 
         // QUAND on vérifie si c'est un palindrome
-        String résultat =  vérification.Vérifier(chaîne);
+        String résultat = vérification.Vérifier(chaîne);
 
         // ALORS toute réponse est précédée de <salutations> dans cette <langue> en fonction du <momentDeLaJournée>
         String[] lines = résultat.split(System.lineSeparator());

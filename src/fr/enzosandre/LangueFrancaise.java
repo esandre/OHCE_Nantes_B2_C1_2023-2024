@@ -7,11 +7,20 @@ public class LangueFrancaise implements LangueInterface {
     }
 
     @Override
-    public String Saluer(MomentDeLaJournee momentDeLaJournee) {
-        if(momentDeLaJournee == MomentDeLaJournee.Matin)        return Expressions.Bonjour;
-        if(momentDeLaJournee == MomentDeLaJournee.AprèsMidi)    return Expressions.Bonjour;
-        if(momentDeLaJournee == MomentDeLaJournee.Soir)         return Expressions.Bonsoir;
-        return Expressions.Bonsoir;
+    public String Saluer(MomentDeLaJournée momentDeLaJournée) {
+        if (momentDeLaJournée == MomentDeLaJournée.Matin) {
+            return Expressions.Bonjour;
+        }
+        if (momentDeLaJournée == MomentDeLaJournée.AprèsMidi) {
+            return Expressions.Bonjour;
+        }
+        if (momentDeLaJournée == MomentDeLaJournée.Soir) {
+            return Expressions.Bonsoir;
+        }
+        if (momentDeLaJournée == MomentDeLaJournée.Nuit) {
+            return Expressions.Bonsoir;
+        }
+        return Expressions.Bonjour;
     }
 
     @Override
