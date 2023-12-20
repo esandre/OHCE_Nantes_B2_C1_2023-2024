@@ -156,6 +156,7 @@ public class DetectionPalindromeTest {
         // ALORS toute réponse est précédée de <salutations> dans cette <langue> en fonction du <momentDeLaJournée>
         String[] lines = résultat.split(System.lineSeparator());
         assertEquals(salutations, lines[0]);
+
     }
 
 
