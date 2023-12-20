@@ -19,5 +19,6 @@ public class MomentDeLaJournée {
         if(heure < 18) return  MomentDeLaJournée.AprèsMidi;
         if(heure < 21) return  MomentDeLaJournée.Soir;
         return MomentDeLaJournée.Nuit;
+
     }
 }
