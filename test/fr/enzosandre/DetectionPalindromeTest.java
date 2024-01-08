@@ -115,24 +115,24 @@ public class DetectionPalindromeTest {
 
     static Stream<Arguments> casTestBonjourSelonHeure() {
         return Stream.of(
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Matin),
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.AprèsMidi),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.AprèsMidi),
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Soir),
-                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Nuit),
-                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.Nuit),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.DepuisHeure(8)),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.DepuisHeure(11)),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.DepuisHeure(12)),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.DepuisHeure(17)),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.DepuisHeure(18)),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.DepuisHeure(20)),
+                Arguments.of("test", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.DepuisHeure(21)),
+                Arguments.of("radar", new LangueFrancaise(), Expressions.Bonsoir, MomentDeLaJournée.DepuisHeure(7)),
                 Arguments.of("test", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Inconnu),
                 Arguments.of("radar", new LangueFrancaise(), Expressions.Bonjour, MomentDeLaJournée.Inconnu),
-                Arguments.of("test", new LangueAnglaise(), Expressions.GoodMorning, MomentDeLaJournée.Matin),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodMorning, MomentDeLaJournée.Matin),
-                Arguments.of("test", new LangueAnglaise(), Expressions.GoodAfternoon, MomentDeLaJournée.AprèsMidi),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodAfternoon, MomentDeLaJournée.AprèsMidi),
-                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Soir),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Soir),
-                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Nuit),
-                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.Nuit),
+                Arguments.of("test", new LangueAnglaise(), Expressions.GoodMorning, MomentDeLaJournée.DepuisHeure(8)),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodMorning, MomentDeLaJournée.DepuisHeure(11)),
+                Arguments.of("test", new LangueAnglaise(), Expressions.GoodAfternoon, MomentDeLaJournée.DepuisHeure(12)),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodAfternoon, MomentDeLaJournée.DepuisHeure(17)),
+                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.DepuisHeure(18)),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.DepuisHeure(20)),
+                Arguments.of("test", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.DepuisHeure(21)),
+                Arguments.of("radar", new LangueAnglaise(), Expressions.GoodEvening, MomentDeLaJournée.DepuisHeure(7)),
                 Arguments.of("test", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Inconnu),
                 Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Inconnu)
         );
@@ -168,6 +168,8 @@ public class DetectionPalindromeTest {
                 Arguments.of("radar", new LangueAnglaise(), Expressions.Hello, MomentDeLaJournée.Inconnu)
         );
     }
+
+    // TODO retirer paramètre salutation
     @ParameterizedTest
     @MethodSource("testDernierSautLigne")
     @DisplayName("Le dernier Output est un saut de ligne")
