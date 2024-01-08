@@ -169,11 +169,10 @@ public class DetectionPalindromeTest {
         );
     }
 
-    // TODO retirer paramètre salutation
     @ParameterizedTest
     @MethodSource("testDernierSautLigne")
     @DisplayName("Le dernier Output est un saut de ligne")
-    public void testDernierSautLigne(String chaîne, LangueInterface langue, String salutations, MomentDeLaJournée momentDeLaJournée) {
+    public void testDernierSautLigne(String chaîne, LangueInterface langue, MomentDeLaJournée momentDeLaJournée) {
         // Récupérer le séparateur de ligne du système
         String newLine = System.getProperty("line.separator");
 
